@@ -1,0 +1,1 @@
+CREATE POLICY "Admins can delete codes" ON public.access_codes FOR DELETE TO public USING (has_role(auth.uid(), 'admin'::app_role));
