@@ -1,4 +1,5 @@
 import { HelpCircle, Key, Calculator, BookOpen, Users, FileDown, ArrowRight, Shield, LogIn, Settings, Stethoscope, LayoutDashboard } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const sections = [
   {
@@ -79,6 +80,9 @@ const sections = [
       "Puedes buscar pacientes por nombre o número de documento.",
       "Cada paciente tiene un historial de evaluaciones que se actualiza automáticamente.",
       "Los datos del paciente se usan para generar informes y dictámenes profesionales.",
+      "Puedes usar el botón 'Arrastrar de Calculadora' para importar automáticamente resultados y diagnósticos del módulo de capítulos.",
+      "El icono del Lápiz (Editar) permite cargar y corregir la información de pacientes ya existentes para mantener los datos actualizados.",
+      "Cualquier modificación se sincroniza en tiempo real, permitiendo generar reportes PDF con la información más reciente.",
     ],
   },
   {
@@ -117,6 +121,10 @@ const sections = [
 ];
 
 export default function Ayuda() {
+  const { isAdmin } = useAuth();
+
+  const filteredSections = sections.filter(sec => sec.title !== "Consola de Administración" || isAdmin);
+
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
       <div className="flex items-center gap-3">
@@ -137,7 +145,7 @@ export default function Ayuda() {
       </div>
 
       <div className="space-y-4">
-        {sections.map((sec) => (
+        {filteredSections.map((sec) => (
           <details key={sec.title} className="bento-item group">
             <summary className="flex items-center gap-3 cursor-pointer list-none">
               <div className="w-8 h-8 rounded-lg gradient-cobalt flex items-center justify-center flex-shrink-0">

@@ -7,7 +7,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
-import { getChapterOptions } from "@/lib/chapters";
+
+const chapterOptions = Array.from({ length: 12 }, (_, i) => {
+  const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+  return {
+    id: `cap-${i + 1}`,
+    label: `Capítulo ${romanNumerals[i]}`,
+  };
+});
 
 interface UserProfile {
   user_id: string;
@@ -327,7 +334,7 @@ export default function AdminConsole() {
               <Select value={selectedChapter} onValueChange={setSelectedChapter}>
                 <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>
                 <SelectContent>
-                  {getChapterOptions().map((ch) => (
+                  {chapterOptions.map((ch) => (
                     <SelectItem key={ch.id} value={ch.id}>{ch.label}</SelectItem>
                   ))}
                 </SelectContent>

@@ -4,5 +4,14 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = "https://wcqywnwkimetbovdjgpo.supabase.co";
 const supabaseKey = "sb_publishable_is18FTnBnQMkkcEqrctxOA_4YLT21Dl";
 
-// Aquí creamos la conexión oficial
-export const supabase = createClient(supabaseUrl, supabaseKey);
+// Aquí creamos la conexión oficial con schema 'public' explícito
+export const supabase = createClient(supabaseUrl, supabaseKey, {
+  db: {
+    schema: 'public'
+  },
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true
+  }
+});

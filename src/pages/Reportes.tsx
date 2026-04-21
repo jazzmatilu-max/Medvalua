@@ -73,10 +73,6 @@ export default function Reportes() {
             <Trash2 className="w-4 h-4 mr-2" />
             Limpiar Todo
           </Button>
-          <Button className="flex-1 gradient-cobalt text-primary-foreground border-0" disabled>
-            <FileDown className="w-4 h-4 mr-2" />
-            Exportar PDF (próximamente)
-          </Button>
         </div>
       )}
     </div>
